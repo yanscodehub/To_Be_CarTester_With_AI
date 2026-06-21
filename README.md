@@ -1,9 +1,26 @@
-# **day1**
-## 安装环境，启动虚拟总线，验证两个终端发送和查看数据
-# **day2**
-## 理解DBC文件的作用，写一个最小 vehicle.dbc，用 Python 把“物理值（8000rpm）”编码成 CAN 帧，再把它解码回“8000rpm”
-## 基于 python-can + cantools 实现 DBC 驱动的信号编码与解码，支持 RPM / Gear 信号。
-# **day3**
-## 写一个每 100ms​ 自动发送一帧 CAN 的Python 脚本，RPM 随时间变化（模拟加速 / 减速），Gear 随 RPM 变化（模拟换挡逻辑），日志可观测、可复现
-## 实现虚拟 Engine ECU，支持 RPM/Gear 动态变化与时序注入。
-## 我构建了一个虚拟 ECU，通过 Python 驱动 SocketCAN，按 100ms 周期注入动态信号，并实现了基于 RPM 的换挡状态机。
+# Day 1 · CAN 环境与虚拟总线验证
+
+安装 Python CAN 开发环境，启动虚拟 CAN 总线（vcan0）。  
+在两个终端中分别发送和接收 CAN 帧，验证总线通信正常，确保数据可被观测与复现。
+
+---
+
+# Day 2 · DBC 文件与信号编解码
+
+理解 DBC 文件的作用，编写最小 `vehicle.dbc`，定义 RPM 与 Gear 信号。  
+基于 `python-can` 与 `cantools` 实现 DBC 驱动的信号编码与解码：  
+将物理值 `8000 rpm` 编码为 CAN 帧，再从 CAN 帧成功解码回 `8000 rpm`。
+
+---
+
+# Day 3 · 虚拟 Engine ECU 与时序注入
+
+实现每 100ms 自动发送一帧 CAN 数据的 Python 脚本。  
+RPM 随时间变化，模拟加速与减速过程；Gear 根据 RPM 自动切换，模拟真实换挡逻辑。  
+
+构建虚拟 Engine ECU：  
+- 使用 SocketCAN 驱动虚拟总线  
+- 支持动态信号注入  
+- 实现基于 RPM 的换挡状态机  
+
+所有行为可通过日志观测，具备可复现性与调试能力。
